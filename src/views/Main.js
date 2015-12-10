@@ -36,7 +36,7 @@ class Main extends React.Component {
         break;
       case "bootstrap":
         Theme = BSTheme;
-        themePath = "/views/bootstrap";
+        themePath = "/bootstrap";
         break;
     }
 
