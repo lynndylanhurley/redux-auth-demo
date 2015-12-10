@@ -9,7 +9,6 @@ import qs from "query-string";
 import {initialize} from "./app";
 import config from "config";
 
-var hostname = process.env.HOSTNAME || "localhost";
 global.__API_URL__ = config.get("apiUrl");
 
 /**
@@ -44,7 +43,7 @@ function getMarkup(webserver, provider) {
  */
 const server = new Server();
 
-server.connection({host: hostname, port: process.env.PORT || 8000});
+server.connection({port: process.env.PORT || 8000});
 
 server.register([
   h2o2,
