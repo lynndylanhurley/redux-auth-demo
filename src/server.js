@@ -96,7 +96,7 @@ server.ext("onPreResponse", (request, reply) => {
         } else if (error || !renderProps) {
           reply.continue();
         } else {
-          var webserver = process.env.NODE_ENV === "production" ? "" : "//" + hostname + ":8080";
+          var webserver = process.env.NODE_ENV === "production" ? "" : "//" + "localhost" + ":8080";
           var output = (blank) ? "" : getMarkup(webserver, provider);
 
           reply(output);
