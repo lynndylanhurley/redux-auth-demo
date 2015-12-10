@@ -77,9 +77,7 @@
     "serialize-javascript": "^1.1.2",
     "thunk": "0.0.1",
     "url-loader": "^0.5.6",
-    "whatwg-fetch": "^0.9.0"
-  },
-  "devDependencies": {
+    "whatwg-fetch": "^0.9.0",
     "babel-loader": "6.1.0",
     "concurrently": "0.1.1",
     "css-loader": "^0.19.0",
@@ -93,6 +91,7 @@
     "webpack": "1.12.9",
     "webpack-dev-server": "1.14.0"
   },
+  "devDependencies": {},
   "engines": {
     "node": ">=0.10.32"
   }
