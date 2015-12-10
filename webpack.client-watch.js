@@ -22,6 +22,8 @@ config.plugins = [
   new webpack.NoErrorsPlugin()
 ];
 
+config.module.loaders.push({ test: /\.scss$/, loaders: ["style", "css", "sass"] });
+
 config.module.postLoaders = [
   {test: /\.js$/, loaders: ["react-hot"], exclude: /node_modules/}
 ]
