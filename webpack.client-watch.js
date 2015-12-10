@@ -1,5 +1,5 @@
 var webpack = require("webpack");
-var config = require("./webpack.client.js");
+var config = require("./webpack.config.js");
 
 var hostname = process.env.HOSTNAME || "localhost";
 
