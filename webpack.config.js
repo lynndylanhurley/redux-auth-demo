@@ -34,7 +34,7 @@ module.exports = {
     postLoaders: [
       { test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader", {publicPath: "/dist/"}) }
     ],
-    noParse: /\.min\.js/
+    noParse: [/\.min\.js/, /autoit\.js/]
   },
   resolve: {
     alias: {

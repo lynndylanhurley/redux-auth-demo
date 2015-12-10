@@ -1,5 +1,6 @@
 import React, { PropTypes } from "react";
 import $ from "jquery";
+import hljs from "highlight.js";
 
 class CodeSnippet extends React.Component {
   static propTypes = {
@@ -16,7 +17,6 @@ class CodeSnippet extends React.Component {
   }
 
   highlight ($target, rawCode) {
-    let hljs = require("highlight.js");
     let code = rawCode
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
