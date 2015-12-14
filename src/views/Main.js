@@ -4,7 +4,7 @@ import CodeSnippet from "./partials/CodeSnippet";
 import ExampleWell from "./partials/ExampleWell";
 import RequestTestButton from "./partials/RequestTestButton";
 import { updateDemoTheme, updateDemoEndpoint } from "../actions/demo-ui";
-import { PageHeader, Row, ButtonGroup, Table } from "react-bootstrap";
+import { PageHeader, OverlayTrigger, Tooltip, Row, ButtonGroup, Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as BSTheme from "redux-auth/bootstrap-theme";
 import * as DefaultTheme from "redux-auth";
@@ -40,9 +40,23 @@ class Main extends React.Component {
         break;
     }
 
+    const deployTooltip = <Tooltip>
+      Create a new instance of this demo on your own Heroku server.
+    </Tooltip>
+
     return (
       <div>
-        <PageHeader>Redux Auth Demo</PageHeader>
+        <PageHeader>
+          Redux Auth
+
+          <OverlayTrigger overlay={deployTooltip} placement="left">
+            <a
+              className="pull-right"
+              href="https://heroku.com/deploy?template=https://github.com/lynndylanhurley/redux-auth-demo">
+              <img src="https://www.herokucdn.com/deploy/button.svg" />
+            </a>
+          </OverlayTrigger>
+        </PageHeader>
 
         <Row>
           <IndexPanel header="Current User">
