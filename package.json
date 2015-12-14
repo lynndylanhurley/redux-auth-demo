@@ -70,7 +70,7 @@
     "react-select": "^0.9.1",
     "react-transmit": "3.0.8",
     "redux": "^3.0.2",
-    "redux-auth": "lynndylanhurley/redux-auth",
+    "redux-auth": "0.0.1-alpha3",
     "redux-immutablejs": "0.0.6",
     "redux-router": "^1.0.0-beta3",
     "redux-thunk": "^1.0.0",
