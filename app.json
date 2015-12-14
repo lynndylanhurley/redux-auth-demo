@@ -1,6 +1,6 @@
 {
   "name": "Redux Auth Kitchen Sink",
-  "description": "Full authentication demo with bootstrap + material-ui themes, heroku deployment, isomorphic rendering + routing, and a hot-reloading dev server.",
+  "description": "Full authentication demo with all themes, heroku deployment, isomorphic rendering + routing, & HMR dev server.",
   "repository": "https://github.com/lynndylanhurley/redux-auth-demo",
   "logo": "https://github.com/lynndylanhurley/redux-auth/raw/master/docs/images/redux-auth-logo.gif",
   "keywords": ["node", "redux", "auth", "react", "token", "authentication", "user"]
