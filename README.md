@@ -1,8 +1,14 @@
 # Redux Auth Demo
 
+## [See It In Action][demo]
+
+View a live demo of this project [here][demo].
+
+Deploy this project to your own [Heroku][heroku] instance by clicking this button:
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/lynndylanhurley/redux-auth-demo)
 
-# What is this?
+## What is this?
 
 This is a fully configured [redux-auth][redux-auth] application. It includes the following:
 
@@ -14,7 +20,7 @@ This is a fully configured [redux-auth][redux-auth] application. It includes the
 * [Webpack][webpack] with live code reloading.
 * Isomorphic / universal rendering. (The server renders the initial content.)
 
-# Installation
+## Installation
 
 ~~~sh
 git clone git@github.com:lynndylanhurley/redux-auth-demo.git
@@ -22,26 +28,57 @@ cd redux-auth-demo
 npm install
 ~~~
 
-# Usage
+## Usage
 
-## Run The Dev Server
+### Run The Dev Server
 
 ~~~sh
 npm run watch
 ~~~
 
-## Deploy to Heroku
+### Deploy to Heroku
 
-Assuming that you have a git remote called `heroku`:
+Assuming that your production git remote is named `heroku`:
 
 ~~~sh
 git push heroku master
 ~~~
 
-# License
+### Project map
+
+The following files are used in the configuration of this app:
+
+~~~
+config/
+  default.json
+  production.json
+
+src/
+  app.js
+  client.js
+  server.js
+~~~
+
+##### `config/default.json`
+Set the url for your development API.
+
+##### `config/production.json`
+Set the url for your production API.
+
+##### `src/app.js`
+Configure your redux store, routes, and redux-auth settings.
+
+##### `src/client.js`
+Render your app client-side.
+
+##### `src/server.js`
+Initialize your app server-side.
+
+## License
 
 WTFPL © Lynn Dylan Hurley
 
+[demo]: http://redux-auth.herokuapp.com
 [heroku]: http://heroku.com/
 [redux-auth]: https://github.com/lynndylanhurley/redux-auth
 [react]: https://facebook.github.io/react
