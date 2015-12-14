@@ -4,7 +4,7 @@
 
 # What is this?
 
-This is a fully configured instance of a [redux-auth][redux-auth] application. It includes the following libraries:
+This is a fully configured [redux-auth][redux-auth] application. It includes the following:
 
 * [React.js][react]
 * [Babel 6][babel]
