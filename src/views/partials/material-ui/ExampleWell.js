@@ -4,7 +4,7 @@ import { Card, CardText } from "material-ui";
 class ExampleWell extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired
-  }
+  };
 
   render () {
     return (

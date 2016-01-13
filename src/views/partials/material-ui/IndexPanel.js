@@ -5,11 +5,11 @@ class IndexPanel extends React.Component {
   static propTypes = {
     title: PropTypes.string,
     children: PropTypes.node
-  }
+  };
 
   static defaultProps = {
     children: <span />
-  }
+  };
 
   render () {
     return (
