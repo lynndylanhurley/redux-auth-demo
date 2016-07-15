@@ -3,7 +3,7 @@ import {Server} from "hapi";
 import h2o2 from "h2o2";
 import inert from "inert";
 import {renderToString} from "react-dom/server";
-import {match} from "redux-router/server";
+import {match} from "react-router";
 import url from "url";
 import qs from "query-string";
 import {initialize} from "./app";
