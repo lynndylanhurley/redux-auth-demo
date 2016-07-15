@@ -1,5 +1,6 @@
 import React, { PropTypes } from "react";
 import { Card, CardText } from "material-ui";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class ExampleWell extends React.Component {
   static propTypes = {
@@ -8,12 +9,14 @@ class ExampleWell extends React.Component {
 
   render () {
     return (
-      <div>
-        <label>Example</label>
-        <Card>
-          <CardText>{this.props.children}</CardText>
-        </Card>
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <label>Example</label>
+          <Card>
+            <CardText>{this.props.children}</CardText>
+          </Card>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
