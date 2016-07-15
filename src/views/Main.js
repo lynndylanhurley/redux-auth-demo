@@ -7,7 +7,7 @@ import { updateDemoTheme, updateDemoEndpoint } from "../actions/demo-ui";
 import { PageHeader, OverlayTrigger, Tooltip, Row, ButtonGroup, Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as BSTheme from "redux-auth/bootstrap-theme";
-import * as DefaultTheme from "redux-auth";
+import * as DefaultTheme from "redux-auth/default-theme";
 import * as MUITheme from "redux-auth/material-ui-theme";
 import Select from "react-select";
 
@@ -22,22 +22,23 @@ class Main extends React.Component {
   }
 
   render () {
-    console.log("page endpoint", this.props.pageEndpoint);
-    let Theme = MUITheme;
-    let themePath = "/material-ui-theme";
+    let Theme, themePath;
     let endpointAttr = (this.props.pageEndpoint === "default")
       ? ""
       : "endpoint=\"evilUser\"";
 
     switch(this.props.theme) {
-      case "default":
+      case "default-theme":
         Theme = DefaultTheme;
-        themePath = "";
+        themePath = "/default-theme";
         break;
       case "bootstrap":
         Theme = BSTheme;
         themePath = "/bootstrap-theme";
         break;
+      default:
+        Theme = MUITheme;
+        themePath = "/material-ui-theme";
     }
 
     const deployTooltip = <Tooltip>
@@ -71,7 +72,7 @@ class Main extends React.Component {
               value={this.props.theme}
               clearable={false}
               options={[
-                {value: "default", label: "Default"},
+                {value: "default-theme", label: "Default"},
                 {value: "bootstrap", label: "Bootstrap"},
                 {value: "materialUi", label: "Material UI"}
               ]}
