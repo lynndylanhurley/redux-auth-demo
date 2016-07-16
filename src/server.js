@@ -89,8 +89,8 @@ server.ext("onPreResponse", (request, reply) => {
     currentLocation: location,
     userAgent: request.headers["user-agent"]
   })
-    .then(({store, provider, blank}) => {
-      store.dispatch(match(location, (error, redirectLocation, renderProps) => {
+    .then(({provider, blank, routes, history}) => {
+      match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if (redirectLocation) {
           reply.redirect(redirectLocation.pathname + redirectLocation.search);
         } else if (error || !renderProps) {
@@ -101,6 +101,6 @@ server.ext("onPreResponse", (request, reply) => {
 
           reply(output);
         }
-      }));
+      });
     }).catch(e => console.log("@-->server error", e, e.stack));
 });
