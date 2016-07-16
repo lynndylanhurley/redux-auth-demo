@@ -3,7 +3,7 @@ import {Server} from "hapi";
 import h2o2 from "h2o2";
 import inert from "inert";
 import {renderToString} from "react-dom/server";
-import {match} from "redux-router/server";
+import {match} from "react-router";
 import url from "url";
 import qs from "query-string";
 import {initialize} from "./app";
@@ -89,8 +89,8 @@ server.ext("onPreResponse", (request, reply) => {
     currentLocation: location,
     userAgent: request.headers["user-agent"]
   })
-    .then(({store, provider, blank}) => {
-      store.dispatch(match(location, (error, redirectLocation, renderProps) => {
+    .then(({provider, blank, routes, history}) => {
+      match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if (redirectLocation) {
           reply.redirect(redirectLocation.pathname + redirectLocation.search);
         } else if (error || !renderProps) {
@@ -101,6 +101,6 @@ server.ext("onPreResponse", (request, reply) => {
 
           reply(output);
         }
-      }));
+      });
     }).catch(e => console.log("@-->server error", e, e.stack));
 });
