@@ -13,11 +13,11 @@ import { routerReducer, syncHistoryWithStore } from 'react-router-redux';
 import demoButtons from './reducers/request-test-buttons';
 import demoUi from './reducers/demo-ui';
 import thunk from 'redux-thunk';
-import Container from './views/partials/Container';
-import Main from './views/Main';
-import Account from './views/Account';
-import SignIn from './views/SignIn';
-import GlobalComponents from './views/partials/GlobalComponents';
+import Main from './containers/Main';
+import Account from './containers/Account';
+import SignIn from './containers/SignIn';
+import Container from './components/Container';
+import GlobalComponents from './components/GlobalComponents';
 
 class App extends React.Component {
   static propTypes = {

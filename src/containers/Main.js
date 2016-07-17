@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import IndexPanel from './partials/IndexPanel';
-import CodeSnippet from './components/CodeSnippet';
-import ExampleWell from './partials/ExampleWell';
-import RequestTestButton from './partials/RequestTestButton';
+import IndexPanel from '../components/IndexPanel';
+import CodeSnippet from '../components/CodeSnippet';
+import ExampleWell from '../components/ExampleWell';
+import RequestTestButton from '../components/RequestTestButton';
 import { updateDemoTheme, updateDemoEndpoint } from '../actions/demo-ui';
 import { PageHeader, OverlayTrigger, Tooltip, Row, ButtonGroup, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';

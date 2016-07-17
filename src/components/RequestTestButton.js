@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Glyphicon } from 'react-bootstrap';
 import { ButtonLoader } from 'redux-auth/bootstrap-theme';
 import { connect } from 'react-redux';
-import { requestTest } from '../../actions/request-test-buttons';
+import { requestTest } from '../actions/request-test-buttons';
 
 class RequestTestButton extends React.Component {
   static propTypes = {

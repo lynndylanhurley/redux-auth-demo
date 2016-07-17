@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { dismissRequestTestSuccessModal } from '../../actions/request-test-buttons';
+import { dismissRequestTestSuccessModal } from '../actions/request-test-buttons';
 
 class RequestTestSuccessModal extends React.Component {
   static propTypes = {
