@@ -15,7 +15,7 @@
     },
     "NPM_CONFIG_PRODUCTION": {
       "description": "Allow webpack to run the build on deploy.",
-      "value": false
+      "value": "false"
     }
   }
 }
