@@ -28,17 +28,18 @@ class Main extends React.Component {
       : "endpoint=\"evilUser\"";
 
     switch(this.props.theme) {
-      case "default-theme":
-        Theme = DefaultTheme;
-        themePath = "/default-theme";
-        break;
       case "bootstrap":
         Theme = BSTheme;
         themePath = "/bootstrap-theme";
         break;
+      case "default-theme":
+        Theme = DefaultTheme;
+        themePath = "/default-theme";
+        break;
       default:
         Theme = MUITheme;
         themePath = "/material-ui-theme";
+        break;
     }
 
     const deployTooltip = <Tooltip>

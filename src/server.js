@@ -62,6 +62,7 @@ app.use((req, res) => {
           loadOnServer({...renderProps, store, helpers: {}}).then(() => {
             res.status(200);
             global.navigator = {userAgent: req.headers['user-agent']};
+
             res.send('<!doctype html>\n' +
               ReactDOM.renderToString(
                 <Html
