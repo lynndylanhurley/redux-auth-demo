@@ -11,7 +11,7 @@ import http from 'http';
 import qs from 'query-string';
 import { initialize } from './app';
 import { match } from 'react-router';
-import { loadOnServer } from 'redux-async-connect';
+import { loadOnServer } from 'redux-connect';
 
 const pretty = new PrettyError();
 const app = new Express();

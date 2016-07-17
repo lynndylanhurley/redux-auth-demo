@@ -33,7 +33,7 @@ npm install
 ### Run The Dev Server
 
 ~~~sh
-npm run watch
+npm run dev
 ~~~
 
 ### Deploy to Heroku

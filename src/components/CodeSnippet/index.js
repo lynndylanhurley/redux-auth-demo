@@ -32,7 +32,7 @@ class CodeSnippet extends React.Component {
     const code = rawCode
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
-      .replace(/\s+/g, ' ')
+      .replace(/ {2,}/g, ' ')
       .replace(/±/g, ' ');
     const el = $(`<code class="${this.props.language}">${code}</code>`)[0];
     hljs.highlightBlock(el);
