@@ -1,4 +1,4 @@
-{ 
+{
   "extends": "eslint-config-airbnb",
   "parser": "babel-eslint",
   "ecmaFeatures": {
@@ -25,7 +25,9 @@
     "no-console": 0,
     "no-alert": 0,
     "no-underscore-dangle": 0,
-    "global-require": 0
+    "global-require": 0,
+    "max-statements": [2, 30],
+    "complexity": [2, 6]
   },
   "plugins": [
     "react", "import"
