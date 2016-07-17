@@ -6,6 +6,7 @@ import RequestTestButton from "./partials/RequestTestButton";
 import { updateDemoTheme, updateDemoEndpoint } from "../actions/demo-ui";
 import { PageHeader, OverlayTrigger, Tooltip, Row, ButtonGroup, Table } from "react-bootstrap";
 import { connect } from "react-redux";
+import { browserHistory } from "react-router";
 import * as BSTheme from "redux-auth/bootstrap-theme";
 import * as DefaultTheme from "redux-auth/default-theme";
 import * as MUITheme from "redux-auth/material-ui-theme";
@@ -122,7 +123,9 @@ class Main extends React.Component {
 
           <IndexPanel header="Email Sign In">
             <ExampleWell>
-              <Theme.EmailSignInForm endpoint={this.props.pageEndpoint} />
+              <Theme.EmailSignInForm 
+                next={() => browserHistory.push("/account")}
+                endpoint={this.props.pageEndpoint} />
             </ExampleWell>
 
             <CodeSnippet>
@@ -173,12 +176,14 @@ class Main extends React.Component {
               <ButtonGroup>
                 <Theme.OAuthSignInButton
                   provider="github"
+                  next={() => browserHistory.push("/account")}
                   endpoint={this.props.pageEndpoint}>
                   Github
                 </Theme.OAuthSignInButton>
                 <Theme.OAuthSignInButton
                   provider="facebook"
                   endpoint={this.props.pageEndpoint}
+                  next={() => browserHistory.push("/account")}
                   secondary={true}
                   bsStyle="primary">
                   Facebook
@@ -186,6 +191,7 @@ class Main extends React.Component {
                 <Theme.OAuthSignInButton
                   provider="google"
                   endpoint={this.props.pageEndpoint}
+                  next={() => browserHistory.push("/account")}
                   primary={true}
                   bsStyle="warning">
                   Google
