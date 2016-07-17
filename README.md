@@ -1,5 +1,9 @@
 # Redux Auth Demo
 
+[![Code Climate](https://codeclimate.com/repos/578c07c7d63f0461d900609d/badges/d25442d79c2bc9985b6a/gpa.svg)](https://codeclimate.com/repos/578c07c7d63f0461d900609d/feed)
+[![Test Coverage](https://codeclimate.com/repos/578c07c7d63f0461d900609d/badges/d25442d79c2bc9985b6a/coverage.svg)](https://codeclimate.com/repos/578c07c7d63f0461d900609d/coverage)
+[![Issue Count](https://codeclimate.com/repos/578c07c7d63f0461d900609d/badges/d25442d79c2bc9985b6a/issue_count.svg)](https://codeclimate.com/repos/578c07c7d63f0461d900609d/feed)
+
 ## [See It In Action][demo]
 
 View a live demo of this project [here][demo].
