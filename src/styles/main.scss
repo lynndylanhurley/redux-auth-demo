@@ -1,14 +1,8 @@
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
-@import "~highlight.js/styles/zenburn.css";
-@import "~react-select/dist/react-select.css";
+:global { @import "~highlight.js/styles/zenburn"; }
+:global { @import "~react-select/dist/react-select"; }
 
 body {
-  .code-snippet {
-    margin-top: 10px;
-  }
-
-  .Select {
+  :global(.Select) {
     margin-bottom: 10px;
   }
 }

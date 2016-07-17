@@ -37,7 +37,7 @@ function requireAuth (store, nextState, replace, next) {
   next();
 }
 
-export function initialize({cookies, isServer, currentLocation, userAgent} = {}) {
+export function initialize({apiUrl, cookies, isServer, currentLocation, userAgent} = {}) {
   const reducer = combineReducers({
     auth: authStateReducer,
     routing: routerReducer,
@@ -78,12 +78,10 @@ export function initialize({cookies, isServer, currentLocation, userAgent} = {})
    */
   return store.dispatch(configure([
     {
-      default: {
-        apiUrl: __API_URL__
-      }
+      default: {apiUrl}
     }, {
       evilUser: {
-        apiUrl:                __API_URL__,
+        apiUrl,
         signOutPath:           "/mangs/sign_out",
         emailSignInPath:       "/mangs/sign_in",
         emailRegistrationPath: "/mangs",

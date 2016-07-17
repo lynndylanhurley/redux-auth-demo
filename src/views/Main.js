@@ -1,6 +1,6 @@
 import React from "react";
 import IndexPanel from "./partials/IndexPanel";
-import CodeSnippet from "./partials/CodeSnippet";
+import CodeSnippet from "./components/CodeSnippet";
 import ExampleWell from "./partials/ExampleWell";
 import RequestTestButton from "./partials/RequestTestButton";
 import { updateDemoTheme, updateDemoEndpoint } from "../actions/demo-ui";

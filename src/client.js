@@ -1,23 +1,30 @@
-import React from "react";
-import ReactDOM from "react-dom";
+/**
+ * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
+ */
+import 'babel-polyfill';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { browserHistory } from 'react-router';
+//import useScroll from 'scroll-behavior/lib/useStandardScroll';
+
 import { initialize } from "./app";
 
+//const _browserHistory = useScroll(() => browserHistory)();
+const dest = document.getElementById('content');
 
-/**
- * Fire-up React Router.
- */
-const reactRoot = window.document.getElementById("react-root");
-initialize().then(({provider}) => {
-  ReactDOM.render(provider, reactRoot);
-});
+console.log('@-->api url', window.__API_URL__);
 
+initialize({apiUrl: window.__API_URL__}).then(({provider}) => {
+  ReactDOM.render(
+    provider,
+    dest
+  );
+})
 
-/**
- * Detect whether the server-side render has been discarded due to an invalid checksum.
- */
-if (process.env.NODE_ENV !== "production") {
-  if (!reactRoot.firstChild || !reactRoot.firstChild.attributes ||
-      !reactRoot.firstChild.attributes["data-react-checksum"]) {
-    console.error("Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.");
+if (process.env.NODE_ENV !== 'production') {
+  window.React = React; // enable debugger
+
+  if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
+    console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
   }
 }

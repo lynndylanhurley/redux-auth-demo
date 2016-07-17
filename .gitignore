@@ -1,7 +1,7 @@
 .idea/
 node_modules/
 coverage/
-dist/
+static/dist/
 build/
 *.log
 *.map

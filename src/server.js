@@ -1,106 +1,92 @@
-import React from "react";
-import {Server} from "hapi";
-import h2o2 from "h2o2";
-import inert from "inert";
-import {renderToString} from "react-dom/server";
-import {match} from "react-router";
-import url from "url";
-import qs from "query-string";
-import {initialize} from "./app";
-import config from "config";
+import Express from 'express';
+import React from 'react';
+import ReactDOM from 'react-dom/server';
+import config from './config';
+import favicon from 'serve-favicon';
+import compression from 'compression';
+import httpProxy from 'http-proxy';
+import path from 'path';
+import Html from './helpers/Html';
+import PrettyError from 'pretty-error';
+import http from 'http';
+import qs from 'query-string';
+import {initialize} from './app';
 
-global.__API_URL__ = config.get("apiUrl");
+import { match } from 'react-router';
+import { loadOnServer } from 'redux-async-connect';
 
-/**
- * base html template
- */
-function getMarkup(webserver, provider) {
-  var markup = renderToString(provider),
-      styles = "";
+const pretty = new PrettyError();
+const app = new Express();
+const server = new http.Server(app);
+const apiUrl = config.apiUrl;
 
-  if (process.env.NODE_ENV === "production") {
-    styles = `<link href="${webserver}/dist/main.css" rel="stylesheet"></link>`;
+app.use(compression());
+app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
+app.use(Express.static(path.join(__dirname, '..', 'static')));
+
+app.use((req, res) => {
+  if (__DEVELOPMENT__) {
+    // Do not cache webpack stats: the script file would change since
+    // hot module replacement is enabled in the development env
+    webpackIsomorphicTools.refresh();
   }
+  const query         = qs.stringify(req.query);
+  const location      = req.path + (query.length ? "?" + query : "");
 
-  return `<!doctype html>
-          <html>
-            <head>
-              <title>Redux Auth – Isomorphic Example</title>
-              <script>
-                window.__API_URL__ = "${global.__API_URL__}";
-              </script>
-              ${styles}
-            </head>
-            <body>
-              <div id="react-root">${markup}</div>
-              <script src="${webserver}/dist/client.js"></script>
-            </body>
-          </html>`;
-}
-
-/**
- * Start Hapi server on port 8000.
- */
-const server = new Server();
-
-server.connection({port: process.env.PORT || 8000});
-
-server.register([
-  h2o2,
-  inert
-], function (err) {
-  if (err) {
-    throw err;
+  function hydrateOnClient(store) {
+    res.send('<!doctype html>\n' +
+      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store}/>));
   }
-
-  server.start(function () {
-    console.info("==> ✅  Server is listening");
-    console.info("==> 🌎  Go to " + server.info.uri.toLowerCase());
-  });
-});
-
-
-/**
- * Attempt to serve static requests from the public folder.
- */
-server.route({
-  method:  "GET",
-  path:    "/{params*}",
-  handler: {
-    file: (request) => "static" + request.path
-  }
-});
-
-
-/**
- * Catch dynamic requests here to fire-up React Router.
- */
-server.ext("onPreResponse", (request, reply) => {
-  if (typeof request.response.statusCode !== "undefined") {
-    return reply.continue();
-  }
-
-  var query    = qs.stringify(request.query);
-  var location = request.path + (query.length ? "?" + query : "");
 
   initialize({
+    apiUrl,
     isServer: true,
-    cookies: request.headers.cookie,
+    cookies: req.headers.cookie,
     currentLocation: location,
-    userAgent: request.headers["user-agent"]
+    userAgent: req.headers["user-agent"]
   })
-    .then(({provider, blank, routes, history}) => {
+    .then(({store, provider, blank, routes, history}) => {
+      if (__DISABLE_SSR__) {
+        hydrateOnClient(store);
+        return;
+      }
+
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if (redirectLocation) {
-          reply.redirect(redirectLocation.pathname + redirectLocation.search);
-        } else if (error || !renderProps) {
-          reply.continue();
+          res.redirect(redirectLocation.pathname + redirectLocation.search);
+        } else if (error) {
+          console.error('ROUTER ERROR:', pretty.render(error));
+          res.status(500);
+          hydrateOnClient(store);
+        } else if (renderProps) {
+          loadOnServer({...renderProps, store, helpers: {}}).then(() => {
+            res.status(200);
+            global.navigator = {userAgent: req.headers['user-agent']};
+            res.send('<!doctype html>\n' +
+              ReactDOM.renderToString(
+                <Html
+                  apiUrl={apiUrl}
+                  assets={webpackIsomorphicTools.assets()}
+                  component={provider}
+                  store={store} />
+              )
+            );
+          });
         } else {
-          var webserver = process.env.NODE_ENV === "production" ? "" : "//" + "localhost" + ":8080";
-          var output = (blank) ? "" : getMarkup(webserver, provider);
-
-          reply(output);
+          res.status(404).send('Not found');
         }
       });
     }).catch(e => console.log("@-->server error", e, e.stack));
 });
+
+if (config.port) {
+  server.listen(config.port, (err) => {
+    if (err) {
+      console.error(err);
+    }
+    console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
+    console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
+  });
+} else {
+  console.error('==>     ERROR: No PORT environment variable has been specified');
+}
