@@ -35,8 +35,7 @@
       "command": "node ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
-        "NODE_ENV": "production",
-        "PORT": 8080
+        "NODE_ENV": "production"
       }
     },
     "start-dev": {
@@ -131,6 +130,7 @@
     "sass-loader": "4.0.0",
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",
+    "strip-loader": "^0.1.2",
     "style-loader": "^0.12.4",
     "url-loader": "^0.5.7",
     "webpack": "1.13.1",

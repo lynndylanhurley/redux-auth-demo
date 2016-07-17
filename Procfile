@@ -1,1 +1,1 @@
-npm start
+npm run start-prod

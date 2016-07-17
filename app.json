@@ -3,5 +3,19 @@
   "description": "Full authentication demo with all themes, heroku deployment, isomorphic rendering + routing, & HMR dev server.",
   "repository": "https://github.com/lynndylanhurley/redux-auth-demo",
   "logo": "https://github.com/lynndylanhurley/redux-auth/raw/master/docs/images/redux-auth-logo.gif",
-  "keywords": ["node", "redux", "auth", "react", "token", "authentication", "user"]
+  "keywords": ["node", "redux", "auth", "react", "token", "authentication", "user"],
+  "env": {
+    "NODE_ENV": {
+      "description": "Disable debug + hot reload for production.",
+      "value": "production"
+    },
+    "NODE_PATH": {
+      "description": "The root for absolute import statements.",
+      "value": "./src"
+    },
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "Allow webpack to run the build on deploy.",
+      "value": false
+    }
+  }
 }
