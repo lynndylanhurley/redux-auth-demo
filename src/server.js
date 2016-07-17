@@ -4,14 +4,12 @@ import ReactDOM from 'react-dom/server';
 import config from './config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
-import httpProxy from 'http-proxy';
 import path from 'path';
 import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import qs from 'query-string';
-import {initialize} from './app';
-
+import { initialize } from './app';
 import { match } from 'react-router';
 import { loadOnServer } from 'redux-async-connect';
 
@@ -30,12 +28,17 @@ app.use((req, res) => {
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
-  const query         = qs.stringify(req.query);
-  const location      = req.path + (query.length ? "?" + query : "");
+  const query = qs.stringify(req.query);
+  const location = `${req.path}${(query.length ? `?${query}` : '')}`;
 
   function hydrateOnClient(store) {
-    res.send('<!doctype html>\n' +
-      ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} store={store}/>));
+    const html = ReactDOM.renderToString(
+      <Html
+        assets={webpackIsomorphicTools.assets()}
+        store={store}
+      />
+    );
+    res.send(`<!doctype html>\n ${html}`);
   }
 
   initialize({
@@ -43,15 +46,19 @@ app.use((req, res) => {
     isServer: true,
     cookies: req.headers.cookie,
     currentLocation: location,
-    userAgent: req.headers["user-agent"]
+    userAgent: req.headers['user-agent']
   })
-    .then(({store, provider, blank, routes, history}) => {
+    .then(({ store, provider, blank, routes, history }) => {
+      if (blank) {
+        return;
+      }
+
       if (__DISABLE_SSR__) {
         hydrateOnClient(store);
         return;
       }
 
-      match({routes, location, history}, (error, redirectLocation, renderProps) => {
+      match({ routes, location, history }, (error, redirectLocation, renderProps) => {
         if (redirectLocation) {
           res.redirect(redirectLocation.pathname + redirectLocation.search);
         } else if (error) {
@@ -59,25 +66,24 @@ app.use((req, res) => {
           res.status(500);
           hydrateOnClient(store);
         } else if (renderProps) {
-          loadOnServer({...renderProps, store, helpers: {}}).then(() => {
+          loadOnServer({ ...renderProps, store, helpers: {} }).then(() => {
             res.status(200);
-            global.navigator = {userAgent: req.headers['user-agent']};
-
-            res.send('<!doctype html>\n' +
-              ReactDOM.renderToString(
-                <Html
-                  apiUrl={apiUrl}
-                  assets={webpackIsomorphicTools.assets()}
-                  component={provider}
-                  store={store} />
-              )
+            global.navigator = { userAgent: req.headers['user-agent'] };
+            const html = ReactDOM.renderToString(
+              <Html
+                apiUrl={apiUrl}
+                assets={webpackIsomorphicTools.assets()}
+                component={provider}
+                store={store}
+              />
             );
+            res.send(`<!doctype html>\n${html}`);
           });
         } else {
           res.status(404).send('Not found');
         }
       });
-    }).catch(e => console.log("@-->server error", e, e.stack));
+    }).catch(e => console.log('@-->server error', e, e.stack));
 });
 
 if (config.port) {
@@ -85,8 +91,16 @@ if (config.port) {
     if (err) {
       console.error(err);
     }
-    console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
-    console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
+    console.info(
+      '----\n==> ✅  %s is running, talking to API server on %s.',
+      config.app.title,
+      config.apiPort
+    );
+    console.info(
+      '==> 💻  Open http://%s:%s in a browser to view the app.',
+      config.host,
+      config.port
+    );
   });
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');

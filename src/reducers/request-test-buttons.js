@@ -1,6 +1,6 @@
-import Immutable from "immutable";
-import { createReducer } from "redux-immutablejs";
-import * as A from "../actions/request-test-buttons";
+import Immutable from 'immutable';
+import { createReducer } from 'redux-immutablejs';
+import * as A from '../actions/request-test-buttons';
 
 const initialState = Immutable.fromJS({
   showSuccessModal: false,
@@ -10,7 +10,7 @@ const initialState = Immutable.fromJS({
 });
 
 export default createReducer(initialState, {
-  [A.REQUEST_TEST_START]: (state, {key}) => state.mergeDeep({
+  [A.REQUEST_TEST_START]: (state, { key }) => state.mergeDeep({
     buttons: {
       [key]: {
         loading: true
@@ -18,7 +18,7 @@ export default createReducer(initialState, {
     }
   }),
 
-  [A.REQUEST_TEST_COMPLETE]: (state, {key}) => state.mergeDeep({
+  [A.REQUEST_TEST_COMPLETE]: (state, { key }) => state.mergeDeep({
     buttons: {
       [key]: {
         loading: false
@@ -28,7 +28,7 @@ export default createReducer(initialState, {
     lastRequestUrl: key
   }),
 
-  [A.REQUEST_TEST_ERROR]: (state, {key}) => state.merge({
+  [A.REQUEST_TEST_ERROR]: (state, { key }) => state.merge({
     buttons: {
       [key]: {
         loading: false

@@ -1,10 +1,10 @@
-import {fetch} from "redux-auth";
+import { fetch } from 'redux-auth';
 
-export const REQUEST_TEST_START    = "REQUEST_TEST_START";
-export const REQUEST_TEST_COMPLETE = "REQUEST_TEST_COMPLETE";
-export const REQUEST_TEST_ERROR    = "REQUEST_TEST_ERROR";
-export const DISMISS_REQUEST_TEST_SUCCESS_MODAL    = "DISMISS_REQUEST_TEST_SUCCESS_MODAL";
-export const DISMISS_REQUEST_TEST_ERROR_MODAL    = "DISMISS_REQUEST_TEST_ERROR_MODAL";
+export const REQUEST_TEST_START = 'REQUEST_TEST_START';
+export const REQUEST_TEST_COMPLETE = 'REQUEST_TEST_COMPLETE';
+export const REQUEST_TEST_ERROR = 'REQUEST_TEST_ERROR';
+export const DISMISS_REQUEST_TEST_SUCCESS_MODAL = 'DISMISS_REQUEST_TEST_SUCCESS_MODAL';
+export const DISMISS_REQUEST_TEST_ERROR_MODAL = 'DISMISS_REQUEST_TEST_ERROR_MODAL';
 
 export function dismissRequestTestSuccessModal() {
   return { type: DISMISS_REQUEST_TEST_SUCCESS_MODAL };
@@ -26,11 +26,11 @@ export function requestTest(url, key) {
     dispatch(requestTestStart(key));
 
     return fetch(url, {
-      credentials: "include"
+      credentials: 'include'
     })
       .then(resp => {
-        if (resp && resp.statusText === "OK") {
-          dispatch(requestTestComplete(key))
+        if (resp && resp.statusText === 'OK') {
+          dispatch(requestTestComplete(key));
         } else {
           dispatch(requestTestError(key));
         }
@@ -38,12 +38,12 @@ export function requestTest(url, key) {
         return resp.json();
       })
       .then(json => {
-        console.log("@-->resp json", json);
+        console.log('@-->resp json', json);
         return json;
       })
       .catch(resp => {
-        console.log("fail", resp);
-        dispatch(requestTestError(key))
+        console.log('fail', resp);
+        dispatch(requestTestError(key));
       });
   };
 }

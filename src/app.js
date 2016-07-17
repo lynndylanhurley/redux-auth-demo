@@ -1,25 +1,29 @@
-import React from "react";
-import {Provider} from "react-redux";
+import React, { PropTypes } from 'react';
+import { Provider } from 'react-redux';
 import {
   Router,
   Route,
   IndexRoute,
   createMemoryHistory,
   browserHistory
-} from "react-router";
-import {configure, authStateReducer} from "redux-auth";
-import {createStore, applyMiddleware, combineReducers, compose} from "redux";
-import { routerReducer, syncHistoryWithStore } from "react-router-redux";
-import demoButtons from "./reducers/request-test-buttons";
-import demoUi from "./reducers/demo-ui";
-import thunk from "redux-thunk";
-import Container from "./views/partials/Container";
-import Main from "./views/Main";
-import Account from "./views/Account";
-import SignIn from "./views/SignIn";
-import GlobalComponents from "./views/partials/GlobalComponents";
+} from 'react-router';
+import { configure, authStateReducer } from 'redux-auth';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { routerReducer, syncHistoryWithStore } from 'react-router-redux';
+import demoButtons from './reducers/request-test-buttons';
+import demoUi from './reducers/demo-ui';
+import thunk from 'redux-thunk';
+import Container from './views/partials/Container';
+import Main from './views/Main';
+import Account from './views/Account';
+import SignIn from './views/SignIn';
+import GlobalComponents from './views/partials/GlobalComponents';
 
 class App extends React.Component {
+  static propTypes = {
+    children: PropTypes.node,
+  };
+
   render() {
     return (
       <Container>
@@ -30,14 +34,14 @@ class App extends React.Component {
   }
 }
 
-function requireAuth (store, nextState, replace, next) {
-  if (!store.getState().auth.getIn(["user", "isSignedIn"])) {
-    replace("/login");
+function requireAuth(store, nextState, replace, next) {
+  if (!store.getState().auth.getIn(['user', 'isSignedIn'])) {
+    replace('/login');
   }
   next();
 }
 
-export function initialize({apiUrl, cookies, isServer, currentLocation, userAgent} = {}) {
+export function initialize({ apiUrl, cookies, isServer, currentLocation, userAgent } = {}) {
   const reducer = combineReducers({
     auth: authStateReducer,
     routing: routerReducer,
@@ -68,7 +72,8 @@ export function initialize({apiUrl, cookies, isServer, currentLocation, userAgen
         <Route
           onEnter={requireAuth.bind(this, store)}
           component={Account}
-          path="account" />
+          path="account"
+        />
       </Route>
     </Router>
   );
@@ -78,22 +83,22 @@ export function initialize({apiUrl, cookies, isServer, currentLocation, userAgen
    */
   return store.dispatch(configure([
     {
-      default: {apiUrl}
+      default: { apiUrl }
     }, {
       evilUser: {
         apiUrl,
-        signOutPath:           "/mangs/sign_out",
-        emailSignInPath:       "/mangs/sign_in",
-        emailRegistrationPath: "/mangs",
-        accountUpdatePath:     "/mangs",
-        accountDeletePath:     "/mangs",
-        passwordResetPath:     "/mangs/password",
-        passwordUpdatePath:    "/mangs/password",
-        tokenValidationPath:   "/mangs/validate_token",
+        signOutPath: '/mangs/sign_out',
+        emailSignInPath: '/mangs/sign_in',
+        emailRegistrationPath: '/mangs',
+        accountUpdatePath: '/mangs',
+        accountDeletePath: '/mangs',
+        passwordResetPath: '/mangs/password',
+        passwordUpdatePath: '/mangs/password',
+        tokenValidationPath: '/mangs/validate_token',
         authProviderPaths: {
-          github:    "/mangs/github",
-          facebook:  "/mangs/facebook",
-          google:    "/mangs/google_oauth2"
+          github: '/mangs/github',
+          facebook: '/mangs/facebook',
+          google: '/mangs/google_oauth2'
         }
       }
     }
@@ -101,11 +106,11 @@ export function initialize({apiUrl, cookies, isServer, currentLocation, userAgen
     cookies,
     isServer,
     currentLocation
-  })).then(({redirectPath, blank} = {}) => {
+  })).then(({ redirectPath, blank } = {}) => {
     // hack for material-ui server-side rendering.
     // see https://github.com/callemall/material-ui/pull/2007
     if (userAgent) {
-      global.navigator = {userAgent};
+      global.navigator = { userAgent };
     }
 
     return ({

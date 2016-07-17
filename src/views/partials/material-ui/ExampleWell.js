@@ -1,5 +1,5 @@
-import React, { PropTypes } from "react";
-import { Card, CardText } from "material-ui";
+import React, { PropTypes } from 'react';
+import { Card, CardText } from 'material-ui';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class ExampleWell extends React.Component {
@@ -7,7 +7,7 @@ class ExampleWell extends React.Component {
     children: PropTypes.node.isRequired
   }
 
-  render () {
+  render() {
     return (
       <MuiThemeProvider>
         <div>

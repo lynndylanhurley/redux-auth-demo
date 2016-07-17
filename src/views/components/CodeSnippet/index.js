@@ -1,6 +1,6 @@
-import React, { PropTypes } from "react";
-import $ from "jquery";
-import hljs from "highlight.js";
+import React, { PropTypes } from 'react';
+import $ from 'jquery';
+import hljs from 'highlight.js';
 
 class CodeSnippet extends React.Component {
   static propTypes = {
@@ -9,37 +9,38 @@ class CodeSnippet extends React.Component {
   }
 
   static defaultProps = {
-    language: "javascript"
+    language: 'javascript'
   }
 
   state = {
     code: <span />
   }
 
-  highlight ($target, rawCode) {
-    let code = rawCode
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/  +/g, " ")
-      .replace(/±/g, " ");
-    let el = $(`<code class="${this.props.language}">${code}</code>`)[0];
+
+  componentDidMount() {
+    const $target = $(this.refs.target);
+    this.highlight($target, this.props.children);
+  }
+
+  componentDidUpdate() {
+    const $target = $(this.refs.target);
+    $target.html('');
+    this.highlight($target, this.props.children);
+  }
+
+  highlight($target, rawCode) {
+    const code = rawCode
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\s+/g, ' ')
+      .replace(/±/g, ' ');
+    const el = $(`<code class="${this.props.language}">${code}</code>`)[0];
     hljs.highlightBlock(el);
     $target.append(el);
   }
 
-  componentDidMount() {
-    let $target = $(this.refs.target);
-    this.highlight($target, this.props.children);
-  }
-
-  componentDidUpdate () {
-    let $target = $(this.refs.target);
-    $target.html("");
-    this.highlight($target, this.props.children);
-  }
-
-  render () {
-    const styles = require("./CodeSnippet.scss");
+  render() {
+    const styles = require('./CodeSnippet.scss');
     return (
       <div className={styles.codeSnippet}>
         <label>Code</label>

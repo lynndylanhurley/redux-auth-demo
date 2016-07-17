@@ -1,26 +1,29 @@
-import React, { PropTypes } from "react";
-import { Modal, Button } from "react-bootstrap";
-import { connect } from "react-redux";
-import { dismissRequestTestErrorModal } from "../../actions/request-test-buttons";
+import React, { PropTypes } from 'react';
+import { Modal, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { dismissRequestTestErrorModal } from '../../actions/request-test-buttons';
 
 class RequestTestErrorModal extends React.Component {
   static propTypes = {
     show: PropTypes.bool,
-    url: PropTypes.string
+    url: PropTypes.string,
+    dispatch: PropTypes.func,
   }
 
   static defaultProps = {
     show: false
   }
 
-  close () {
+  close() {
     this.props.dispatch(dismissRequestTestErrorModal());
   }
 
-  render () {
+  render() {
     return (
-      <Modal show={this.props.show}
-             onHide={this.close.bind(this)}>
+      <Modal
+        show={this.props.show}
+        onHide={this.close.bind(this)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Ajax Request Error</Modal.Title>
         </Modal.Header>
@@ -41,7 +44,7 @@ class RequestTestErrorModal extends React.Component {
   }
 }
 
-export default connect(({demoButtons}) => ({
-  show: demoButtons.get("showErrorModal"),
-  url: demoButtons.get("lastRequestUrl")
+export default connect(({ demoButtons }) => ({
+  show: demoButtons.get('showErrorModal'),
+  url: demoButtons.get('lastRequestUrl')
 }))(RequestTestErrorModal);

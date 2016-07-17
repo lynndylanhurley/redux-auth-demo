@@ -1,5 +1,5 @@
-import React, { PropTypes } from "react";
-import { Card, CardHeader, CardText, GridTile } from "material-ui";
+import React, { PropTypes } from 'react';
+import { Card, CardHeader, CardText, GridTile } from 'material-ui';
 
 class IndexPanel extends React.Component {
   static propTypes = {
@@ -11,9 +11,9 @@ class IndexPanel extends React.Component {
     children: <span />
   }
 
-  render () {
+  render() {
     return (
-      <GridTile cols={1} style={{padding: "4px"}}>
+      <GridTile cols={1} style={{ padding: '4px' }}>
         <Card>
           <CardHeader title={this.props.title} />
           <CardText>{this.props.children}</CardText>

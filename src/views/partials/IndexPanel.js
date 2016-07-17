@@ -1,5 +1,5 @@
-import React, { PropTypes } from "react";
-import { Panel, Col } from "react-bootstrap";
+import React, { PropTypes } from 'react';
+import { Panel, Col } from 'react-bootstrap';
 
 class IndexPanel extends React.Component {
   static propTypes = {
@@ -9,11 +9,11 @@ class IndexPanel extends React.Component {
   }
 
   static defaultProps = {
-    bsStyle: "info",
+    bsStyle: 'info',
     children: <span />
   }
 
-  render () {
+  render() {
     return (
       <Col sm={6}>
         <Panel {...this.props} />
