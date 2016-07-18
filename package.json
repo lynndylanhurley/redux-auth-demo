@@ -1,7 +1,7 @@
 {
   "name": "redux-auth-demo",
   "description": "Token authentication for redux with isomorphic support.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
