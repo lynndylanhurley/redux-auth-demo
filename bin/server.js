@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 require('../server.babel'); // babel registration (runtime transpilation for node)
-var path = require('path');
-var rootDir = path.resolve(__dirname, '..');
+const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
+const path = require('path');
+const rootDir = path.resolve(__dirname, '..');
 /**
  * Define isomorphic constants.
  */
@@ -19,10 +20,10 @@ if (__DEVELOPMENT__) {
   }
 }
 
-// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../webpack/webpack-isomorphic-tools'))
+global.webpackIsomorphicTools = new WebpackIsomorphicTools(
+  require('../webpack/webpack-isomorphic-tools')
+)
   .development(__DEVELOPMENT__)
-  .server(rootDir, function() {
+  .server(rootDir, () => {
     require('../src/server');
   });
