@@ -1,10 +1,10 @@
 import { assert } from 'chai';
 import { updateDemoTheme, updateDemoEndpoint } from '../../src/actions/demo-ui';
-import { makeStore } from './helper';
+import { makeStore } from '../helper';
 
 describe('demo-ui redux', () => {
-  it('should update the demo theme', () => {
-    const store = makeStore();
+  it('should update the demo theme', async () => {
+    const { store } = await makeStore();
     assert.equal(
       'materialUi',
       store.getState().demoUi.get('theme')
@@ -18,8 +18,8 @@ describe('demo-ui redux', () => {
     );
   });
 
-  it('should update the demo endpoint', () => {
-    const store = makeStore();
+  it('should update the demo endpoint', async () => {
+    const { store } = await makeStore();
     assert.equal(
       'default',
       store.getState().demoUi.get('endpoint')

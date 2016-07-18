@@ -29,11 +29,14 @@ export function requestTest(url, key) {
       credentials: 'include'
     })
       .then(resp => {
+        console.log('got resp');
         if (resp && resp.statusText === 'OK') {
           dispatch(requestTestComplete(key));
         } else {
           dispatch(requestTestError(key));
         }
+
+        console.log('retrieving json');
 
         return resp.json();
       })

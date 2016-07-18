@@ -1,0 +1,5 @@
+language: node_js
+node_js:
+  - "6.1"
+script: npm run cover
+before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
