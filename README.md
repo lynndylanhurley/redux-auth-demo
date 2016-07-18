@@ -22,6 +22,7 @@ This is a fully configured [redux-auth][redux-auth] application. It includes the
 * Both [Material UI][material-ui] and [React Bootstrap][react-bootstrap] themes. (Just remove the one(s) that you don't want.)
 * [Heroku][heroku] deployment. Click the "deploy" button at the top of this page to create your own instance.
 * [Webpack][webpack] with live code reloading.
+* [mocha][mocha], [jsdom][jsdom], and [enzyme][enzyme] for testing.
 * Isomorphic / universal rendering. (The server renders the initial content.)
 
 ## Installation
@@ -91,3 +92,6 @@ WTFPL © Lynn Dylan Hurley
 [webpack]: https://webpack.github.io
 [redux]: https://github.com/rackt/redux
 [babel]: https://babeljs.io
+[mocha]: https://mochajs.org/
+[enzyme]: https://github.com/airbnb/enzyme
+[jsdom]: https://github.com/tmpvar/jsdom
