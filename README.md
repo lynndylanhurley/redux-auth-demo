@@ -41,6 +41,11 @@ npm install
 npm run dev
 ~~~
 
+### Run The Tests
+~~~sh
+npm run test
+~~~
+
 ### Deploy to Heroku
 
 Assuming that your production git remote is named `heroku`:
@@ -59,9 +64,16 @@ config/
   production.json
 
 src/
+  components/
+  containers/
   app.js
   client.js
   server.js
+
+test/
+  components/
+  redux/
+  helper.js
 ~~~
 
 ##### `config/default.json`
@@ -69,6 +81,12 @@ Set the url for your development API.
 
 ##### `config/production.json`
 Set the url for your production API.
+
+##### `src/components/`
+Re-usable React components.
+
+##### `src/containers/`
+Page components that correlate to react-router Routes.
 
 ##### `src/app.js`
 Configure your redux store, routes, and redux-auth settings.
@@ -78,6 +96,15 @@ Render your app client-side.
 
 ##### `src/server.js`
 Initialize your app server-side.
+
+##### `test/components/`
+Tests for the corresponding React components.
+
+##### `test/redux/`
+Tests for redux actions + reducers.
+
+##### `test/helper.js`
+Shared methods to be used by tests.
 
 ## License
 
