@@ -50,6 +50,7 @@ app.use((req, res) => {
   })
     .then(({ store, provider, blank, routes, history }) => {
       if (blank) {
+        res.send('<!doctype html><body>loading...</body>');
         return;
       }
 
