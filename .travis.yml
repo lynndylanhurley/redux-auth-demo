@@ -3,3 +3,8 @@ node_js:
   - "6.1"
 script: npm run cover
 before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
+addons:
+  code_climate:
+    repo_token: 012d70ff60e9470e96f6427a97a48c53f467bbf7b383bcaab293317d039b13de
+after_script:
+  - codeclimate-test-reporter < coverage/lcov.info
